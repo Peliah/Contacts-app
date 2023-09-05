@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-const Contact = ({ contact }) => {
+const Contact = ({ contacts }) => {
 
     const navigation = useNavigation();
 
@@ -9,16 +9,16 @@ const Contact = ({ contact }) => {
         navigation.navigate('ContactDetails', { contact });
       };
   return (
-    <TouchableOpacity style={styles.contactCon} onPress={() => handleContactPress(contact)}>
+    <TouchableOpacity style={styles.contactCon} onPress={() => handleContactPress(contacts)}>
       <View style={styles.imgCon}>
         <View style={styles.placeholder}>
-          <Text style={styles.txt}>{contact?.name[0]}</Text>
+          <Text style={styles.txt}>{contacts?.first_name[0]}</Text>
         </View>
       </View>
       <View style={styles.contactDat}>
-        <Text style={styles.name}>{contact?.name}</Text>
+        <Text style={styles.name}>{contacts?.first_name +" "+ contacts?.last_name}</Text>
         <Text style={styles.phoneNumber}>
-        {/* {contact.phoneNumbers[0].number} */}
+        {contacts.phone}
         </Text>
       </View>
     </TouchableOpacity>

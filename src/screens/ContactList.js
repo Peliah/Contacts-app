@@ -4,32 +4,35 @@ import Contact from '../components/Contact';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from '@react-navigation/native';
 import * as Contacts from 'expo-contacts'
+import { connect } from 'react-redux';
+import { addContact } from '../redux/ContactAction';
 // import { head } from 'lodash';
-const ContactList = () => {
-    const [contacts, setContacts] = useState([]);
+const ContactList = ({contacts}) => {
+    // const [contacts, setContacts] = useState([]);
     const [searchText, setSearchText] = useState('');
     const navigation = useNavigation();
+    console.log({contacts})
 
-    useEffect(() => {
-        (async () => {
-          const { status } = await Contacts.requestPermissionsAsync();
-          if (status === "granted") {
-            const { data } = await Contacts.getContactsAsync({
-              fields: [Contacts.PHONE_NUMBERS],
-            });
-            if (data.length > 0) {
-              setContacts(data);
-              console.log(data);
-            }
-          }
-        })();
-      }, []);
+    // useEffect(() => {
+    //     (async () => {
+    //       const { status } = await Contacts.requestPermissionsAsync();
+    //       if (status === "granted") {
+    //         const { data } = await Contacts.getContactsAsync({
+    //           fields: [Contacts.PHONE_NUMBERS],
+    //         });
+    //         if (data.length > 0) {
+    //           setContacts(data);
+    //           console.log(data);
+    //         }
+    //       }
+    //     })();
+    //   }, []);
 
       const keyExtractor = (item, idx) => {
         return item?.id?.toString() || idx.toString();
       };
       const renderItem = ({ item, index }) => {
-        return <Contact contact={item} />;
+        return <Contact contacts={item} />;
       };
     
     //   const filteredContacts = contacts.filter(contact =>
@@ -49,7 +52,7 @@ const ContactList = () => {
       <FlatList
       data={contacts}
       renderItem={renderItem}
-      keyExtractor={keyExtractor}
+      keyExtractor={(contact) => contact.id.toString()}
       style={styles.list}
     />
     <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('AddContact')} >
@@ -59,7 +62,14 @@ const ContactList = () => {
   )
 }
 
-export default ContactList
+const mapStateToProps = (state) => {
+  return {
+    contacts: state.contact.contacts, // Adjust the slice name as needed
+  };
+};
+
+
+export default connect(mapStateToProps)(ContactList)
 
 const styles = StyleSheet.create({
     container: {

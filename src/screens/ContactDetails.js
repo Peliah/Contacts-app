@@ -18,20 +18,37 @@ const Contact = ({route}) => {
       </View>
       <View style={styles.midBod1}>
         <View style={styles.midBod1Letter}>
-          <Text style={{fontSize:50, fontWeight:'400'}}>{contact.name[0]}</Text>
+          <Text style={{fontSize:50, fontWeight:'400'}}>{contact.first_name[0]}</Text>
         </View>
         <View style={{alignItems:'center', justifyContent:'center'}}>
-          <Text style={{alignItems:'center', justifyContent:'center'}}>{contact.name}</Text>
+          <Text style={{alignItems:'center', justifyContent:'center'}}>{contact.first_name + " " + contact.last_name}</Text>
           <Text style={{alignItems:'center', justifyContent:'center'}}>{contact.company}</Text>
         </View>
       </View>
       <View style={styles.midBodOptions}>
         <Icon name='call-outline' size={32} color={'#0074d9'}/>
-        <Icon name='call-outline' size={32} color={'#0074d9'}/>
-        <Icon name='call-outline' size={32} color={'#0074d9'}/>
+        <Icon name='document-text-outline' size={32} color={'#0074d9'}/>
+        {/* <Icon name='call-outline' size={32} color={'#0074d9'}/> */}
       </View>
-      <View style={styles.belowBodOptions}></View>
-      <Text>{contact.name}</Text>
+      <View style={styles.belowBodOptions}>
+        {/* <Text>{contact.first_name+ " " + contact.last_name}</Text> */}
+        <View style={styles.contact}>
+          <Icon name='podium-outline' size={32}/>
+          <Text style={styles.textstyle}>{contact.company}</Text>
+        </View>
+        <View style={styles.contact}>
+          <Icon name='call-outline' size={32}/>
+          <Text style={styles.textstyle}>{contact.phone}</Text>
+        </View>
+        <View style={styles.contact}>
+          <Icon name='mail-outline' size={32}/>
+          <Text style={styles.textstyle}>{contact.email}</Text>
+        </View>
+        <View style={styles.contact}>
+          <Icon name='globe-outline' size={32}/>
+          <Text style={styles.textstyle}>{contact.country}</Text>
+        </View>
+      </View>
     </View>
   )
 }
@@ -76,6 +93,24 @@ midBod1Letter:{
 midBodOptions:{
   flexDirection:'row',
   alignItems:'center',
-  justifyContent:'space-evenly'
+  justifyContent:'space-evenly',
+  borderBottomWidth:0.2,
+  paddingBottom:20
+},
+belowBodOptions:{
+  // borderBottomWidth:0.2,
+  // paddingBottom:20
+  // alignItems:'center',
+  // justifyContent:'center'
+},
+contact:{
+  // justifyContent:'space-evenly',
+  flexDirection:'row',
+  padding:10,
+  alignItems: 'center'
+},
+textstyle:{
+  fontWeight:'500',
+  paddingLeft:20
 }
 })
