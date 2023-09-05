@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import Contact from '../components/Contact';
 import Icon from 'react-native-vector-icons/Ionicons'
+import { useNavigation } from '@react-navigation/native';
 import * as Contacts from 'expo-contacts'
 // import { head } from 'lodash';
 const ContactList = () => {
     const [contacts, setContacts] = useState([]);
     const [searchText, setSearchText] = useState('');
+    const navigation = useNavigation();
 
     useEffect(() => {
         (async () => {
@@ -50,7 +52,7 @@ const ContactList = () => {
       keyExtractor={keyExtractor}
       style={styles.list}
     />
-    <TouchableOpacity style={styles.button}>
+    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('AddContact')} >
         <Icon name='add-outline' size={32}/>
       </TouchableOpacity>
     </View>
