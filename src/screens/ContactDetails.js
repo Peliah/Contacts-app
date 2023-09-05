@@ -3,7 +3,7 @@ import React from 'react'
 
 const Contact = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Contact</Text>
     </View>
   )
@@ -11,4 +11,10 @@ const Contact = () => {
 
 export default Contact
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container:{
+    flex:1,
+    marginTop:30,
+    padding:16
+}
+})
